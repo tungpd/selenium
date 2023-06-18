@@ -47,6 +47,7 @@ class WebDriver(ChromiumDriver):
         chrome_options=None,
         service: Service = None,
         keep_alive=DEFAULT_KEEP_ALIVE,
+        remote_conn_timeout=None,
     ) -> None:
         """Creates a new instance of the chrome driver. Starts the service and
         then creates new instance of chrome driver.
@@ -91,6 +92,7 @@ class WebDriver(ChromiumDriver):
             service_log_path,
             service,
             keep_alive,
+            remote_conn_timeout,
         )
 
     def create_options(self) -> Options:

@@ -44,6 +44,7 @@ class ChromiumDriver(RemoteWebDriver):
         service_log_path=DEFAULT_SERVICE_LOG_PATH,
         service: Service = None,
         keep_alive=DEFAULT_KEEP_ALIVE,
+        remote_conn_timeout=None,
     ) -> None:
         """Creates a new WebDriver instance of the ChromiumDriver. Starts the
         service and then creates new WebDriver instance of ChromiumDriver.
@@ -99,7 +100,8 @@ class ChromiumDriver(RemoteWebDriver):
 
         self.service = service
         self.service.start()
-
+        if remote_conn_timeout:
+            ChromiumRemoteConnection.set_timeout(remote_conn_timeout)
         try:
             super().__init__(
                 command_executor=ChromiumRemoteConnection(
